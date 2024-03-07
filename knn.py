@@ -93,25 +93,25 @@ def plot_test_decisions(X, y, knn, dataset_name, feature_labels, num_dimensions=
 if __name__ == '__main__':
     # Load data
     iris = load_iris()
-    num_dim = 2
+    num_dim = 4
     num_pca_components = 2
     num_neighbors = 10
     X, y = load_dataset(iris, num_dimensions=num_dim)
     feature_labels = iris.feature_names[:num_dim]
     
     # Non-PCA Code
-    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
-    knn = train_knn(X_train, y_train, k=num_neighbors)
-    accuracy = test_knn(knn, X_test, y_test)
-    print(f'Accuracy: {accuracy}')
-    plot_decision_boundaries(X, y, knn, dataset_name='Iris', feature_labels=feature_labels, num_dimensions=num_dim, class_names=iris.target_names)
-    # plot_test_decisions(X_test, y_test, knn, dataset_name='Iris', feature_labels=feature_labels, num_dimensions=2)
-    
-    # PCA Code
-    # X_pca = perform_pca(X, num_dimensions=num_pca_components)
-    # X_train, X_test, y_train, y_test = train_test_split(X_pca, y, random_state=0)
+    # X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
     # knn = train_knn(X_train, y_train, k=num_neighbors)
     # accuracy = test_knn(knn, X_test, y_test)
     # print(f'Accuracy: {accuracy}')
-    # plot_decision_boundaries(X_pca, y, knn, dataset_name='Iris', feature_labels=["Principal Component 1", "Principal Component 2"], num_dimensions=num_pca_components, class_names=iris.target_names)
-    # plot_test_decisions(X_test, y_test, knn, dataset_name='Iris', feature_labels=["Principal Component 1", "Principal Component 2"], num_dimensions=2)
+    # plot_decision_boundaries(X, y, knn, dataset_name='Iris', feature_labels=feature_labels, num_dimensions=num_dim, class_names=iris.target_names)
+    # plot_test_decisions(X_test, y_test, knn, dataset_name='Iris', feature_labels=feature_labels, num_dimensions=2)
+    
+    # PCA Code
+    X_pca = perform_pca(X, num_dimensions=num_pca_components)
+    X_train, X_test, y_train, y_test = train_test_split(X_pca, y, random_state=0)
+    knn = train_knn(X_train, y_train, k=num_neighbors)
+    accuracy = test_knn(knn, X_test, y_test)
+    print(f'Accuracy: {accuracy}')
+    plot_decision_boundaries(X_pca, y, knn, dataset_name='Iris', feature_labels=["Principal Component 1", "Principal Component 2"], num_dimensions=num_pca_components, class_names=iris.target_names)
+    plot_test_decisions(X_test, y_test, knn, dataset_name='Iris', feature_labels=["Principal Component 1", "Principal Component 2"], num_dimensions=2)
